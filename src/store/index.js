@@ -1,0 +1,66 @@
+import axios from "axios";
+import { createStore } from "vuex";
+
+export default createStore({
+  state: {
+    currentForecast: {},
+    dailyForecasts: [],
+    city: "",
+    country: "",
+    loading: false,
+  },
+  mutations: {
+    UPDATE_FORECASTS(state, payload) {
+      for (const forecast in payload) {
+        if (Object.hasOwnProperty.call(payload, forecast)) {
+          state[forecast] = payload[forecast];
+        }
+      }
+    },
+    UPDATE_SEARCH_INPUT(state, payload) {
+      state.city = payload;
+    },
+    LOADING_PENDING(state) {
+      state.loading = true;
+    },
+    LOADING_COMPLETE(state) {
+      state.loading = false;
+    },
+  },
+  actions: {
+    getForecasts({ commit, state }, payload) {
+      console.log("action called", payload);
+      commit("LOADING_PENDING");
+      return axios
+        .get("/api/location/key", {
+          params: { location: payload.input },
+          withCredentials: true,
+          baseURL: "https://weatherinfo-backend.herokuapp.com/",
+        })
+        .then((response) => {
+          commit("UPDATE_FORECASTS", response.data);
+          commit("UPDATE_SEARCH_INPUT", payload.input);
+          commit("LOADING_COMPLETE");
+          console.log(state.currentForecast);
+          console.log(state.todayForecast);
+          console.log(state.dailyForecasts);
+          console.log(state.country);
+        });
+    },
+  },
+  getters: {
+    currentForecast: (state) => state.currentForecast,
+    dailyForecasts: (state) => state.dailyForecasts,
+    city: (state) => {
+      let inputWords = state.city.split(" ");
+      inputWords = inputWords.map(
+        (word) => `${word.charAt(0).toUpperCase()}${word.slice(1)}`
+      );
+
+      return inputWords.join(" ");
+    },
+    country: (state) => state.country,
+    loading: (state) => state.loading,
+  },
+  modules: {},
+});
