@@ -7,13 +7,7 @@
     id="nav"
   >
     <router-link to="/" class="navbar-brand text-white">Weather</router-link>
-    <search-input
-      className="small"
-      v-if="!home"
-      :onSubmit="handleSearchInput"
-    />
-    <!-- <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> -->
+    <search-input className="small" v-if="!home" :onSubmit="dispatchAction" />
   </div>
   <div :class="[{ home: home }, 'py-5', 'content']">
     <router-view v-if="!loading" />
@@ -49,18 +43,33 @@ export default {
   computed: {
     ...mapGetters(["loading", "currentForecast", "city", "dailyForecasts"]),
   },
+  created() {
+    const input = sessionStorage.getItem("lastSearch"),
+      redirectToHome = sessionStorage.getItem("redirectToHome");
+
+    if (input) {
+      this.dispatchAction(input);
+    } else if (redirectToHome) {
+      this.$router.push({ name: "Home" });
+    }
+  },
   watch: {
-    $route(to) {
+    $route(to, from) {
       this.home = to.path === "/" ? true : false;
+
+      if (from.path === "/weather-forecast") {
+        sessionStorage.removeItem("lastSearch");
+        sessionStorage.setItem("redirectToHome");
+      }
     },
   },
   methods: {
-    handleSearchInput(data) {
+    dispatchAction(data) {
       this.$store.dispatch("getForecasts", { input: data }).then(() => {
         if (this.dailyForecasts.length) {
-          this.$router.push({ name: "WeatherForcast" });
+          this.$router.push({ name: "WeatherForecast" });
         } else {
-          this.$router.push("/weather-forcast");
+          this.$router.push({ name: "Home" });
         }
       });
     },
@@ -109,7 +118,7 @@ export default {
     }
 
     @media screen and (min-width: 900px) {
-      margin-left: 100px;
+      margin-left: 120px;
     }
 
     @media screen and (min-width: 1028px) {

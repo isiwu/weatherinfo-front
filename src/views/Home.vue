@@ -21,9 +21,8 @@ export default {
   methods: {
     handleSearchInput(input) {
       this.$store.dispatch("getForecasts", { input }).then(() => {
-        console.log(this.dailyForecasts);
         if (this.dailyForecasts.length) {
-          this.$router.push({ name: "WeatherForcast" });
+          this.$router.push({ name: "WeatherForecast" });
         } else {
           this.$router.push(this.$route.path);
         }

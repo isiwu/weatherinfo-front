@@ -9,8 +9,8 @@ const routes = [
     component: Home,
   },
   {
-    path: "/weather-forcast",
-    name: "WeatherForcast",
+    path: "/weather-forecast",
+    name: "WeatherForecast",
     component: WeatherForcast,
   },
   {

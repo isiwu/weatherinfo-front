@@ -25,6 +25,12 @@ export default {
   },
   methods: {
     handleSearchSubmit() {
+      const redirectToHome = sessionStorage.getItem("redirectToHome");
+
+      sessionStorage.setItem("lastSearch", this.input);
+      if (redirectToHome) {
+        sessionStorage.removeItem("redirectToHome");
+      }
       this.onSubmit(this.input);
     },
   },
