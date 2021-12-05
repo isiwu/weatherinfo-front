@@ -8,6 +8,7 @@ export default createStore({
     city: "",
     country: "",
     loading: false,
+    serverError: false,
   },
   mutations: {
     UPDATE_FORECASTS(state, payload) {
@@ -26,10 +27,12 @@ export default createStore({
     LOADING_COMPLETE(state) {
       state.loading = false;
     },
+    UPDATE_SERVER_ERROR(state) {
+      state.serverError = true;
+    },
   },
   actions: {
-    getForecasts({ commit, state }, payload) {
-      console.log("action called", payload);
+    getForecasts({ commit }, payload) {
       commit("LOADING_PENDING");
       return axios
         .get("/api/location/key", {
@@ -44,10 +47,10 @@ export default createStore({
           commit("UPDATE_FORECASTS", response.data);
           commit("UPDATE_SEARCH_INPUT", payload.input);
           commit("LOADING_COMPLETE");
-          console.log(state.currentForecast);
-          console.log(state.todayForecast);
-          console.log(state.dailyForecasts);
-          console.log(state.country);
+        })
+        .catch(() => {
+          commit("UPDATE_SERVER_ERROR");
+          commit("LOADING_COMPLETE");
         });
     },
   },
@@ -64,6 +67,7 @@ export default createStore({
     },
     country: (state) => state.country,
     loading: (state) => state.loading,
+    serverError: (state) => state.serverError,
   },
   modules: {},
 });

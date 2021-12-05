@@ -1,5 +1,5 @@
 <template>
-  <div
+  <nav
     :class="[
       { 'bg-dark': home, 'weather-forecast': !home },
       'navbar navbar-expand-sm navbar-light',
@@ -8,8 +8,11 @@
   >
     <router-link to="/" class="navbar-brand text-white">Weather</router-link>
     <search-input className="small" v-if="!home" :onSubmit="dispatchAction" />
+  </nav>
+  <div v-if="serverError" class="alert alert-danger">
+    Server cannot be reached. Try again!
   </div>
-  <div :class="[{ home: home }, 'py-5', 'content']">
+  <main :class="[{ home: home }, 'py-5', 'content']">
     <router-view v-if="!loading" />
     <img
       v-else
@@ -17,7 +20,7 @@
       alt="loading image"
       class="loading-image"
     />
-  </div>
+  </main>
   <footer class="">
     <p class="bg-dark text-white p-4">
       <span class="copyright" v-if="home">Copyright &copy; 2021</span>
@@ -41,7 +44,13 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["loading", "currentForecast", "city", "dailyForecasts"]),
+    ...mapGetters([
+      "loading",
+      "currentForecast",
+      "city",
+      "dailyForecasts",
+      "serverError",
+    ]),
   },
   created() {
     const input = sessionStorage.getItem("lastSearch"),
