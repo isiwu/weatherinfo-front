@@ -6,13 +6,24 @@
     </div>
     <div class="d-flex flex-wrap justify-content-center">
       <div class="icon pr-lg-5">
-        <img
-          :src="`${publicPath}weather-icon-${currentForecast.WeatherIcon}.png`"
-          width="150"
-          alt="weather icon"
-        />
+        <div>
+          <img
+            :src="`${publicPath}weather-icon-${currentForecast.WeatherIcon}.png`"
+            width="150"
+            alt="weather icon"
+          />
+        </div>
+        <div class="description font-weight-bold">
+          {{ currentForecast.IconPhrase }}
+        </div>
+        <p class="">
+          Feel
+          <span class="font-weight-bold">{{
+            currentForecast.RealFeelTemperature.Phrase
+          }}</span>
+        </p>
       </div>
-      <div class="pt-2">
+      <div class="pt-5">
         <div class="temperature p-1 font-weight-bold">
           {{ fahrenheitToCelsius(currentForecast.Temperature.Value) }}&deg;C
         </div>
@@ -23,15 +34,6 @@
               fahrenheitToCelsius(currentForecast.RealFeelTemperature.Value)
             }}&deg;C</span
           >
-        </p>
-        <div class="description font-weight-bold">
-          {{ currentForecast.IconPhrase }}
-        </div>
-        <p class="">
-          Feel
-          <span class="font-weight-bold">{{
-            currentForecast.RealFeelTemperature.Phrase
-          }}</span>
         </p>
       </div>
     </div>
