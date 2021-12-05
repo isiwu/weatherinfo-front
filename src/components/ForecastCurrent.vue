@@ -24,7 +24,7 @@
         </p>
       </div>
       <div class="pt-5">
-        <div class="temperature p-1 font-weight-bold">
+        <div class="temperature p-1 font-weight-bolder">
           {{ fahrenheitToCelsius(currentForecast.Temperature.Value) }}&deg;C
         </div>
         <p class="">
