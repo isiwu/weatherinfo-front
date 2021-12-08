@@ -11,11 +11,13 @@
     >
     <search-input className="small" v-if="!home" :onSubmit="dispatchAction" />
   </nav>
-  <div v-if="serverError" class="alert alert-danger">
-    Server cannot be reached. Try again!
+  <div v-if="serverError" class="alert alert-danger mb-0">
+    Server busy. Try again!
   </div>
   <main :class="[{ home: home }, 'py-5', 'content']">
-    <router-view v-if="!loading" />
+    <div v-if="!loading">
+      <router-view />
+    </div>
     <img
       v-else
       src="@/assets/loading-icon.gif"
