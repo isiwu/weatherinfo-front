@@ -6,7 +6,9 @@
     ]"
     id="nav"
   >
-    <router-link to="/" class="navbar-brand text-white">Weather</router-link>
+    <router-link :to="{ name: 'Home' }" class="navbar-brand text-white"
+      >Weather</router-link
+    >
     <search-input className="small" v-if="!home" :onSubmit="dispatchAction" />
   </nav>
   <div v-if="serverError" class="alert alert-danger">
