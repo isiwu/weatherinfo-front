@@ -33,8 +33,6 @@ export default createStore({
   },
   actions: {
     getForecasts({ commit }, payload) {
-      console.log(payload);
-      console.log(process.env.NODE_ENV);
       commit("LOADING_PENDING");
       return axios
         .get("/api/location/key", {
