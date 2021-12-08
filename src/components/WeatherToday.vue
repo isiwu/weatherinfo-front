@@ -77,7 +77,10 @@ export default {
 
   .table-item {
     flex: 40%;
-    margin-left: 40px;
+
+    @media screen and (min-width: 756px) {
+      margin-left: 40px;
+    }
 
     &.table-item-1 {
       margin-left: 0px;

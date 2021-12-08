@@ -118,6 +118,16 @@ export default {
   }
 
   .small {
+    margin: 0 4px;
+
+    @media screen and (min-width: 577px) and (max-width: 632px) {
+      width: 400px;
+    }
+
+    @media screen and (min-width: 633px) {
+      width: 500px;
+    }
+
     @media screen and (min-width: 718px) {
       margin-left: 40px;
     }
@@ -131,7 +141,7 @@ export default {
     }
 
     @media screen and (min-width: 1028px) {
-      margin-left: 120px;
+      margin-left: 235px;
     }
   }
 }

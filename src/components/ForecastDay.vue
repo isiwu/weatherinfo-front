@@ -1,14 +1,9 @@
 <template>
   <div class="day-forecast">
-    <div class="title d-flex justify-content-between">
-      <div class="day">
-        <h4 :class="[{ 'text-success': index === 0 }, 'display-5']">
-          {{ weeks[day] }}
-        </h4>
-      </div>
-      <div class="date">
-        <p :class="{ 'text-success': index === 0 }">{{ date }}</p>
-      </div>
+    <div class="day">
+      <h4 :class="[{ 'text-success': index === 0 }, 'display-5']">
+        {{ weeks[day] }}
+      </h4>
     </div>
     <p class="icon">
       <img
@@ -59,9 +54,6 @@ export default {
       return new Date(this.dateOnly()).toLocaleDateString();
     },
     ...mapGetters(["currentForecast"]),
-  },
-  created() {
-    console.log(this.forecast);
   },
   methods: {
     fahrenheitToCelsius(fah) {

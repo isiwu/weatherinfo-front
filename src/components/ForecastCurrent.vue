@@ -1,11 +1,11 @@
 <template>
-  <div :class="[{ small: small }, 'weather-info py-2 px-4 mb-3 jumbotron']">
+  <div :class="[{ small: small }, 'weather-info py-2 px-lg-4 mb-3 jumbotron']">
     <div class="title d-flex justify-content-between pt-3 pb-1">
-      <h3 class="city">{{ city }}, {{ country }} Weather</h3>
+      <h3 class="city">{{ city }} Weather</h3>
       <p class="date">{{ weeks[day] }} {{ date }}</p>
     </div>
     <div class="d-flex flex-wrap justify-content-center">
-      <div class="icon pr-lg-5">
+      <div class="icon">
         <div>
           <img
             :src="`${publicPath}weather-icon-${currentForecast.WeatherIcon}.png`"
@@ -14,21 +14,15 @@
           />
         </div>
         <div class="description font-weight-bold">
-          {{ currentForecast.IconPhrase }}
+          <p>{{ currentForecast.IconPhrase }}</p>
         </div>
-        <p class="">
-          Feel
-          <span class="font-weight-bold">{{
-            currentForecast.RealFeelTemperature.Phrase
-          }}</span>
-        </p>
       </div>
-      <div class="pt-5">
-        <div class="temperature p-1 font-weight-bolder">
+      <div class="temperature">
+        <div class="pb-1 font-weight-bold">
           {{ fahrenheitToCelsius(currentForecast.Temperature.Value) }}&deg;C
         </div>
         <p class="">
-          RealFeelTemperature
+          FeelLike
           <span class="font-weight-bold">
             {{
               fahrenheitToCelsius(currentForecast.RealFeelTemperature.Value)
@@ -89,12 +83,23 @@ export default {
   margin: 0px auto;
   border-radius: 20px;
   background: #fff;
+
+  @media screen and (max-width: 730px) {
+    padding: 0px 20px;
+  }
   &.small {
     width: 30%;
     margin: 20px;
   }
   .icon {
-    font-size: 6rem;
+    @media screen and (min-width: 768px) {
+      padding-right: 40px;
+    }
+  }
+  .temperature {
+    @media screen and (min-width: 716px) {
+      padding-top: 45px;
+    }
   }
 }
 </style>
