@@ -40,7 +40,10 @@ export default createStore({
         .get("/api/location/key", {
           params: { location: payload.input },
           withCredentials: true,
-          baseURL: "https://weatherinfo-backend.herokuapp.com/",
+          baseURL:
+            process.env.NODE_ENV === "development"
+              ? "/"
+              : "https://weatherinfo-backend.herokuapp.com/",
         })
         .then((response) => {
           commit("UPDATE_FORECASTS", response.data);
