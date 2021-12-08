@@ -33,15 +33,14 @@ export default createStore({
   },
   actions: {
     getForecasts({ commit }, payload) {
+      console.log(payload);
+      console.log(process.env.NODE_ENV);
       commit("LOADING_PENDING");
       return axios
         .get("/api/location/key", {
           params: { location: payload.input },
           withCredentials: true,
-          baseURL:
-            process.env.NODE_ENV === "production"
-              ? "https://weatherinfo-backend.herokuapp.com/"
-              : "/",
+          baseURL: "https://weatherinfo-backend.herokuapp.com/",
         })
         .then((response) => {
           commit("UPDATE_FORECASTS", response.data);
