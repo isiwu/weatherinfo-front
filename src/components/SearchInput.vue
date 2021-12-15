@@ -6,7 +6,7 @@
       :class="[{ small: className }, 'search-input']"
       v-model="input"
       @keyup.enter="handleSearchSubmit"
-      placeholder="Search City or Location"
+      placeholder="search city or location in nigeria"
     />
   </div>
 </template>
