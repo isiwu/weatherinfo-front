@@ -21,7 +21,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .daily-forecast {
-  width: 85%;
+  width: 45%;
   margin: 0 auto;
   margin-top: 15px;
   border-radius: 15px;
