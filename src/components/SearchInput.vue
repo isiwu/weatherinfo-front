@@ -11,7 +11,6 @@
   </div>
 </template>
 <script>
-//import { mapGetters } from "vuex";
 export default {
   name: "SearchInput",
   props: {
@@ -47,17 +46,8 @@ export default {
   border-radius: 25px;
   border: none;
 
-  // @media screen and (min-width: 577px) and (max-width: 632px) {
-  //   width: 30%;
-  // }
-
   &:focus {
     outline: none;
   }
-
-  // &.small {
-  //   width: 500px;
-  //   margin: 0 4px;
-  // }
 }
 </style>

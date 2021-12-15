@@ -10,12 +10,12 @@
         v-if="index > 0"
         :src="`${publicPath}weather-icon-${forecast.Day.Icon}.png`"
         alt="weather icon"
-        width="120"
+        width="45"
       />
       <img
         v-else
         :src="`${publicPath}weather-icon-${currentForecast.WeatherIcon}.png`"
-        width="120"
+        width="45"
         alt="weather icon"
       />
     </p>
